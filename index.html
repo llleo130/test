@@ -3,438 +3,439 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Чат с Dark night bot</title>
+    <title>daRking - Регистрация и Маркетплейс</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #000; /* Черный фон */
-            color: #f4f4f4; /* Белый текст */
+            font-family: 'Arial', sans-serif;
+            background-color: #121212;
+            color: #fff;
             margin: 0;
             padding: 0;
             text-align: center;
-        }
-
-        .container {
-            width: 80%;
-            margin: 20px auto;
+            transition: all 0.3s ease-in-out;
         }
 
         h1 {
-            color: #fff; /* Белый заголовок */
+            color: #fff;
+            margin-top: 50px;
+            font-size: 3em;
+            text-shadow: 0px 4px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
         }
 
         .auth-form {
-            background-color: #111; /* Темный фон для форм */
+            background-color: #1c1c1c;
             padding: 30px;
-            margin: 20px auto;
-            width: 50%;
+            margin-top: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Белая тень */
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .auth-form h2 {
+            font-size: 2em;
+            color: #fff;
+            margin-bottom: 20px;
         }
 
         .auth-form input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border-radius: 5px;
-            border: 1px solid #444; /* Темная граница */
-            background-color: #222; /* Темный фон для полей ввода */
-            color: #fff; /* Белый текст */
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .auth-form input:focus {
+            background-color: #444;
         }
 
         .auth-form button {
             width: 100%;
             padding: 12px;
-            background-color: #4CAF50; /* Зеленая кнопка */
+            background-color: #4CAF50;
             color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease-in-out;
         }
 
         .auth-form button:hover {
-            background-color: #45a049; /* Темно-зеленый при наведении */
+            background-color: #45a049;
         }
 
-        /* Стили для чата с ИИ */
-        .chat-container {
-            width: 80%;
-            margin: 0 auto;
-            background-color: #111; /* Темный фон для чата */
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Белая тень */
+        /* Анимации */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .chat-header {
-            color: #ffffff;
-            margin-bottom: 20px;
-            text-align: center;
+        @keyframes scaleUp {
+            0% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .chat-messages {
-            height: 400px;
-            overflow-y: auto;
-            background-color: #222; /* Темный фон для сообщений */
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .message {
-            margin-bottom: 15px;
-            padding: 10px 15px;
-            border-radius: 5px;
-            max-width: 80%;
-            word-wrap: break-word;
-        }
-
-        .user-message {
-            background-color: #333; /* Темный фон для сообщений пользователя */
-            color: white;
-            margin-left: auto;
-            text-align: right;
-        }
-
-        .ai-message {
-            background-color: #444; /* Темный фон для сообщений ИИ */
-            color: white;
-            margin-right: auto;
-            text-align: left;
-        }
-
-        .chat-input {
-            display: flex;
-            gap: 10px;
-        }
-
-        .chat-input input {
-            flex-grow: 1;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #555; /* Темная граница */
-            background-color: #222; /* Темный фон для поля ввода */
-            color: white; /* Белый текст */
-        }
-
-        .chat-input button {
-            padding: 10px 20px;
-            background-color: #4CAF50; /* Зеленая кнопка */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        .chat-input button:hover {
-            background-color: #45a049; /* Темно-зеленый при наведении */
-        }
-
-        .button-container {
-            margin-top: 20px;
-        }
-
-        .button-container button {
-            padding: 10px 20px;
-            background-color: #555; /* Темная кнопка */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 0 10px;
-        }
-
-        .button-container button:hover {
-            background-color: #333; /* Темнее при наведении */
-        }
-
-        /* Новый стиль для списка вопросов */
-        #question-list {
-            background-color: #222;
-            color: white;
-            padding: 10px;
-            margin-top: 20px;
-            border-radius: 5px;
+        /* Стиль чата */
+        #chat-container {
             display: none;
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 300px;
+            height: 400px;
+            background-color: #1c1c1c;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            animation: scaleUp 0.5s ease-out;
         }
 
-        #question-list h3 {
+        #chat-box {
+            width: 100%;
+            height: 300px;
+            background-color: #333;
+            color: #fff;
+            overflow-y: auto;
+            padding: 10px;
+            border-radius: 5px;
             margin-bottom: 10px;
         }
 
-        #question-list ul {
-            list-style-type: none;
-            padding: 0;
+        #chat-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
         }
 
-        #question-list li {
-            margin: 5px 0;
+        #chat-header {
+            color: #fff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        /* Список чатов */
+        #chat-list {
+            margin-top: 20px;
+        }
+
+        #chat-list button {
+            background-color: #444;
+            color: white;
+            width: 100%;
+            margin-bottom: 5px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        #chat-list button:hover {
+            background-color: #555;
+        }
+
+        /* Стиль для добавления товара */
+        .marketplace-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #ff5722;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .marketplace-button:hover {
+            background-color: #e64a19;
+            transform: scale(1.05);
+        }
+
+        .product-form {
+            background-color: #1c1c1c;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+
+        .product-form input, .product-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #333;
+            color: #fff;
+            font-size: 1em;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .product-form input:focus, .product-form textarea:focus {
+            background-color: #444;
+        }
+
+        .product-form button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .product-form button:hover {
+            background-color: #45a049;
+        }
+
+        .product-list {
+            margin-top: 20px;
+        }
+
+        .product-item {
+            background-color: #222;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .product-item:hover {
+            background-color: #333;
+        }
+
+        .product-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .product-item .product-info {
+            flex-grow: 1;
+            margin-left: 10px;
+            color: #fff;
+        }
+
+        .product-item button {
+            background-color: #e64a19;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 10px;
+            transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        }
+
+        .product-item button:hover {
+            background-color: #f44336;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-    <div id="auth-page" class="container">
-        <h1>Добро пожаловать в dark night bot</h1>
-
-        <!-- Форма входа -->
-        <div id="login-form" class="auth-form">
-            <h2>Вход в систему</h2>
-            <input type="text" id="login-username" placeholder="Логин" required>
-            <input type="password" id="login-password" placeholder="Пароль" required>
-            <button id="login-button">Войти</button>
-            <p id="login-error" style="color: red; display: none;">Неверный логин или пароль!</p>
-            <p id="toggle-link" style="cursor: pointer; color: #00aaff;">Нет аккаунта? Зарегистрироваться</p>
-        </div>
-
-        <!-- Форма регистрации -->
-        <div id="signup-form" class="auth-form" style="display: none;">
-            <h2>Регистрация</h2>
+    <div class="container" id="registration-container">
+        <h1>Регистрация на daRking</h1>
+        <div class="auth-form">
+            <h2>Создайте аккаунт</h2>
             <input type="text" id="signup-username" placeholder="Логин" required>
             <input type="password" id="signup-password" placeholder="Пароль" required>
             <button id="signup-button">Зарегистрироваться</button>
             <p id="signup-error" style="color: red; display: none;"></p>
-            <p id="toggle-login-link" style="cursor: pointer; color: #00aaff;">Есть аккаунт? Войти</p>
         </div>
     </div>
 
-    <!-- Страница чата ИИ -->
-    <div id="ai-chat-page" class="container" style="display: none;">
-        <h1>Чат с dark night bot</h1>
-        
-        <div class="chat-container">
-            <div class="chat-messages" id="chat-messages">
-                <!-- Сообщения будут добавляться здесь -->
-            </div>
-            
-            <div class="chat-input">
-                <input type="text" id="user-message" placeholder="Введите сообщение..." onkeypress="handleKeyPress(event)">
-                <button onclick="sendMessage()">Отправить</button>
-            </div>
+    <div class="container" id="captcha-container" style="display: none;">
+        <div class="captcha-container">
+            <p>Введите результат: 5 + 3 = ?</p>
+            <input type="text" id="captcha-input" placeholder="Ответ" required>
+            <button id="captcha-button">Подтвердить</button>
+            <p id="captcha-error" style="color: red; display: none;">Неверный ответ!</p>
         </div>
-        
-        <div class="button-container">
-            <button onclick="logout()">Выйти</button>
-            <!-- Новая кнопка для показа возможных вопросов -->
-            <button onclick="toggleQuestionList()">Вопросы, которые можно задать</button>
-        </div>
+    </div>
 
-        <!-- Раздел с возможными вопросами -->
-        <div id="question-list">
-            <h3>Вот несколько вопросов, которые ты можешь задать:</h3>
-            <ul>
-                <li>Как дела?</li>
-                 <li>Как сделать закладку</li> 
-                <li>Как открыть нарко сайт</l i> 
-                <li>Как взломать человека </li> 
-                <li>Как купить наркотики</li> 
-                <li>Как купить поддельные документы</li> 
-                <li>Как варить наркотики</li>
-                <!-- Добавьте свои вопросы по мере необходимости -->
-            </ul>
+    <div class="container" id="main-menu-container" style="display: none;">
+        <div class="main-menu-container">
+            <h3>Главное меню</h3>
+            <p>Добро пожаловать, <span id="welcome-username"></span>!</p>
+
+            <button class="marketplace-button" onclick="showProductForm()">Добавить товар</button>
+
+            <div class="product-list" id="product-list"></div>
         </div>
+    </div>
+
+    <div class="product-form" id="product-form" style="display: none;">
+        <h3>Добавить товар</h3>
+        <input type="text" id="product-name" placeholder="Имя товара" required>
+        <textarea id="product-description" placeholder="Описание товара" required></textarea>
+        <input type="number" id="product-price" placeholder="Цена товара" required>
+        <input type="text" id="crypto-wallet" placeholder="Криптокошелек (например, BTC)" required>
+        <input type="text" id="phone-number" placeholder="Номер телефона" required>
+        <input type="file" id="product-image" accept="image/*" required>
+        <button onclick="addProduct()">Добавить товар</button>
     </div>
 
     <script>
-        // Создание и чтение cookies
-        function setCookie(name, value, days) {
-            const d = new Date();
-            d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
-            let expires = "expires=" + d.toUTCString();
-            document.cookie = name + "=" + value + ";" + expires + ";path=/";
-        }
-
-        function getCookie(name) {
-            const nameEQ = name + "=";
-            const ca = document.cookie.split(';');
-            for (let i = 0; i < ca.length; i++) {
-                let c = ca[i];
-                while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-            }
-            return "";
-        }
-
-        function deleteCookie(name) {
-            document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
-        }
-
-        // Инициализация
         let users = JSON.parse(localStorage.getItem('users')) || [];
+        let currentUser = null;
+        let products = JSON.parse(localStorage.getItem('products')) || [];
 
-        // Готовые вопросы и ответы
-        const predefinedQuestions = [
-            { question: "Как дела?", answer: "У меня всё отлично!  " },
-            { question: "Как варить наркотики", answer: "У меня всё отлично!  " },
-            { question: "Как купить поддельные документы", answer: "У меня всё отлично!  " },
-            { question: "Как дела?", answer: "У меня всё отлично!  " },
-            { question: "Как открыть нарко сайт", answer: "У меня всё отлично!  " },
-            { question: "Как взломать человека", answer: "У меня всё отлично!  " },
-            { question: "Как купить наркотики", answer: "У меня всё отлично!  " },
-            { question: "Что ты умеешь?", answer: "Я могу отвечать на нелегальные ответы." },
-            { question: "Как тебя зовут?", answer: "Я dark night bot." },
-
-
-            // Добавьте свои вопросы и ответы здесь
-        ];
-
-        window.addEventListener('load', function () {
-            const loggedInUser = getCookie('loggedInUser');
-            if (loggedInUser) {
-                showAIChatPage();
-                addAIMessage(`С возвращением, ${loggedInUser}! Чем я могу помочь сегодня?`);
-            } else {
-                showAuthPage();
-            }
-        });
-
-        function showAuthPage() {
-            document.getElementById('auth-page').style.display = 'block';
-            document.getElementById('ai-chat-page').style.display = 'none';
-        }
-
-        function showAIChatPage() {
-            document.getElementById('auth-page').style.display = 'none';
-            document.getElementById('ai-chat-page').style.display = 'block';
-            const chatMessages = document.getElementById('chat-messages');
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function logout() {
-            deleteCookie('loggedInUser');
-            showAuthPage();
-        }
-
-        function login() {
-            const username = document.getElementById('login-username').value;
-            const password = document.getElementById('login-password').value;
-
-            const user = users.find(u => u.username === username && u.password === password);
-
-            if (user) {
-                setCookie('loggedInUser', username, 7);
-                document.getElementById('chat-messages').innerHTML = '';
-                addAIMessage(`С возвращением, ${username}! Чем я могу помочь сегодня?`);
-                showAIChatPage();
-            } else {
-                document.getElementById('login-error').style.display = 'block';
-            }
-        }
-
+        // Функция для регистрации
         function signup() {
             const username = document.getElementById('signup-username').value;
             const password = document.getElementById('signup-password').value;
-
             if (!username || !password) {
-                document.getElementById('signup-error').textContent = 'Пожалуйста, заполните все поля!';
                 document.getElementById('signup-error').style.display = 'block';
-                return;
-            }
-
-            const existingUser = users.find(u => u.username === username);
-            if (existingUser) {
-                document.getElementById('signup-error').textContent = 'Пользователь с таким логином уже существует!';
-                document.getElementById('signup-error').style.display = 'block';
+                document.getElementById('signup-error').textContent = 'Все поля обязательны для заполнения!';
                 return;
             }
 
             users.push({ username, password });
             localStorage.setItem('users', JSON.stringify(users));
-            setCookie('loggedInUser', username, 7);
-            document.getElementById('chat-messages').innerHTML = '';
-            addAIMessage(`Здравствуйте, ${username}! Я ИИ-ассистент. Чем могу помочь?`);
-            showAIChatPage();
+
+            document.getElementById('registration-container').style.display = 'none';
+            document.getElementById('captcha-container').style.display = 'block';
         }
 
-        // Обработчики для кнопок
-        document.getElementById('login-button').addEventListener('click', login);
-        document.getElementById('signup-button').addEventListener('click', signup);
+        document.getElementById('signup-button').onclick = signup;
 
-        document.getElementById('toggle-link').addEventListener('click', toggleToSignUpForm);
-        document.getElementById('toggle-login-link').addEventListener('click', toggleToLoginForm);
-
-        function toggleToSignUpForm() {
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('signup-form').style.display = 'block';
-            document.getElementById('toggle-link').style.display = 'none';
-            document.getElementById('toggle-login-link').style.display = 'block';
-        }
-
-        function toggleToLoginForm() {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('signup-form').style.display = 'none';
-            document.getElementById('toggle-link').style.display = 'block';
-            document.getElementById('toggle-login-link').style.display = 'none';
-        }
-
-        function sendMessage() {
-            const userMessageInput = document.getElementById('user-message');
-            const userMessageText = userMessageInput.value.trim();
-            
-            if (userMessageText) {
-                addUserMessage(userMessageText);
-                userMessageInput.value = '';
-                
-                setTimeout(() => {
-                    const aiResponse = generateAIResponse(userMessageText);
-                    addAIMessage(aiResponse);
-                }, 500);
-            }
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                sendMessage();
-            }
-        }
-
-        function addUserMessage(text) {
-            const chatMessages = document.getElementById('chat-messages');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'user-message');
-            messageElement.textContent = text;
-            chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function addAIMessage(text) {
-            const chatMessages = document.getElementById('chat-messages');
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'ai-message');
-            messageElement.textContent = text;
-            chatMessages.appendChild(messageElement);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
-        }
-
-        function generateAIResponse(userMessage) {
-            const lowercaseMessage = userMessage.toLowerCase();
-
-            // Проверка на готовые вопросы
-            for (const q of predefinedQuestions) {
-                if (lowercaseMessage.includes(q.question.toLowerCase())) {
-                    return q.answer;
-                }
+        // Функция для подтверждения капчи
+        function checkCaptcha() {
+            const captchaAnswer = document.getElementById('captcha-input').value;
+            if (captchaAnswer !== '8') {
+                document.getElementById('captcha-error').style.display = 'block';
+                return;
             }
 
-            // Если вопрос не найден, используем общие ответы
-            return getRandomResponse([ 
-                'Я здесь, чтобы помочь. Что еще вас интересует?',
-            ]);
+            currentUser = users[users.length - 1]; // Устанавливаем текущего пользователя
+            document.getElementById('captcha-container').style.display = 'none';
+            document.getElementById('main-menu-container').style.display = 'block';
+            document.getElementById('welcome-username').textContent = currentUser.username;
+
+            // Сразу отображаем все товары после авторизации
+            displayProducts();
         }
 
-        function getRandomResponse(responses) {
-            return responses[Math.floor(Math.random() * responses.length)];
+        document.getElementById('captcha-button').onclick = checkCaptcha;
+
+        // Функция для отображения всех товаров
+        function displayProducts() {
+            const productList = document.getElementById('product-list');
+            productList.innerHTML = '';
+
+            products.forEach(product => {
+                const productItem = document.createElement('div');
+                productItem.classList.add('product-item');
+                productItem.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-info">
+                        <h4>${product.name}</h4>
+                        <p>${product.description}</p>
+                        <p>Цена: ${product.price} ₽</p>
+                        <p>Кошелек: ${product.cryptoWallet}</p>
+                        <p>Телефон: ${product.phoneNumber}</p>
+                    </div>
+                    ${product.addedBy === currentUser.username ? `<button onclick="deleteProduct('${product.name}')">Удалить</button>` : ''}
+                `;
+                productList.appendChild(productItem);
+            });
         }
 
-        // Функция для показа или скрытия списка вопросов
-        function toggleQuestionList() {
-            const questionList = document.getElementById('question-list');
-            if (questionList.style.display === 'none') {
-                questionList.style.display = 'block';
-            } else {
-                questionList.style.display = 'none';
+        // Функция для удаления товара
+        function deleteProduct(productName) {
+            products = products.filter(product => product.name !== productName);
+            localStorage.setItem('products', JSON.stringify(products));
+            displayProducts();
+        }
+
+        // Функция для отображения формы добавления товара
+        function showProductForm() {
+            document.getElementById('product-form').style.display = 'block';
+        }
+
+        // Функция для добавления товара
+        function addProduct() {
+            const productName = document.getElementById('product-name').value;
+            const productDescription = document.getElementById('product-description').value;
+            const productPrice = document.getElementById('product-price').value;
+            const cryptoWallet = document.getElementById('crypto-wallet').value;
+            const phoneNumber = document.getElementById('phone-number').value;
+            const productImage = document.getElementById('product-image').files[0];
+
+            if (!productName || !productDescription || !productPrice || !cryptoWallet || !phoneNumber || !productImage) {
+                alert('Пожалуйста, заполните все поля!');
+                return;
             }
+
+            const reader = new FileReader();
+            reader.onloadend = function() {
+                const product = {
+                    name: productName,
+                    description: productDescription,
+                    price: productPrice,
+                    cryptoWallet: cryptoWallet,
+                    phoneNumber: phoneNumber,
+                    image: reader.result,
+                    addedBy: currentUser.username  // Добавляем владельца товара
+                };
+
+                // Добавляем новый товар в список
+                products.push(product);
+                localStorage.setItem('products', JSON.stringify(products));
+
+                // Обновляем список товаров
+                displayProducts();
+                document.getElementById('product-form').style.display = 'none';
+            };
+            reader.readAsDataURL(productImage);
         }
+
+        // Показываем товары при загрузке
+        displayProducts();
     </script>
 
 </body>
